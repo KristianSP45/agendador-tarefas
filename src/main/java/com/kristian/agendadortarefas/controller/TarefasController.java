@@ -2,8 +2,7 @@ package com.kristian.agendadortarefas.controller;
 
 import com.kristian.agendadortarefas.business.TarefasService;
 import com.kristian.agendadortarefas.business.dto.TarefasDTO;
-import com.kristian.agendadortarefas.business.mapper.TarefasConverter;
-import com.kristian.agendadortarefas.infrastructure.repository.TarefasRepository;
+import com.kristian.agendadortarefas.infrastructure.enums.StatusNotificacaoEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +16,6 @@ import java.util.List;
 @RequestMapping("/tarefas")
 public class TarefasController {
     private final TarefasService tarefasService;
-    private final TarefasConverter tarefasConverter;
-    private final TarefasRepository tarefasRepository;
 
     @PostMapping
     public ResponseEntity<TarefasDTO> gravarTarefas(@RequestBody TarefasDTO dto,
@@ -36,5 +33,22 @@ public class TarefasController {
     @GetMapping
     public ResponseEntity<List<TarefasDTO>> buscaTarefasPorEmail(@RequestHeader("Authorization") String token){
         return ResponseEntity.ok(tarefasService.buscaTarefasPorEmail(token));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deletarTarefaPorId(@RequestParam("id") String id){
+        tarefasService.deletarTarefaPorId(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping
+    public ResponseEntity<TarefasDTO> alterarStatusNotificacao(@RequestParam("status")StatusNotificacaoEnum status,
+                                                              @RequestParam("id") String id){
+        return ResponseEntity.ok(tarefasService.alterarStatus(status, id));
+    }
+
+    @PutMapping
+    public  ResponseEntity<TarefasDTO> updateTarefas(@RequestBody TarefasDTO dto, @RequestParam("id") String id){
+        return  ResponseEntity.ok(tarefasService.updateTarefas(dto, id));
     }
 }
