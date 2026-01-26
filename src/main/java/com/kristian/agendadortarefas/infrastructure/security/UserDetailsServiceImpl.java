@@ -13,9 +13,11 @@ public class UserDetailsServiceImpl {
     @Autowired
     private UsuarioClient client;
 
-    public UserDetails carregaDadosUsuario(String email, String token){
+    public UserDetails carregaDadosUsuario(String email, String token){//Esse método:
+        //recebe o subject do JWT (email)
+        //recebe o token pra repassar à outra API
         UsuarioDTO usuarioDTO = client.buscarUsuarioPorEmail(email, token);
-        return User
+        return User//User é uma implementação pronta de UserDetails.
                 .withUsername(usuarioDTO.getEmail()) // Define o nome de usuário como o e-mail
                 .password(usuarioDTO.getSenha()) // Define a senha do usuário
                 .build();

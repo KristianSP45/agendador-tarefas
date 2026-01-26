@@ -1,5 +1,12 @@
+//O que é essa SecurityConfig? Ela é o cérebro da segurança da aplicação.
+//É aqui que você diz ao Spring Security: quem pode acessar o quê,
+//como a autenticação acontece, qual filtro entra na frente das requisições e
+//se vai ter sessão ou não
 package com.kristian.agendadortarefas.infrastructure.security;
 
+import com.kristian.agendadortarefas.infrastructure.security.JwtRequestFilter;
+import com.kristian.agendadortarefas.infrastructure.security.JwtUtil;
+import com.kristian.agendadortarefas.infrastructure.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +23,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configuration
-@EnableWebSecurity
+@Configuration// “essa classe cria beans e configura o contexto do Spring”
+@EnableWebSecurity//liga o Spring Security. Sem isso, nada de segurança funciona.
 public class SecurityConfig {
 
     // Instâncias de JwtUtil e UserDetailsService injetadas pelo Spring
