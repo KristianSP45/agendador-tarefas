@@ -12,10 +12,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document("tarefa")
+@Document("tarefa")//Isso aqui define: “Essa classe representa documentos da collection tarefa no MongoDB.”
+//SQL > @Table(name = "tarefa")
+//Mongo > @Document("tarefa")
 public class TarefasEntity {
 
-    @Id
+    @Id//Diz ao Spring Data Mongo: “Esse campo representa o identificador único do documento.”
     private String id;
     private String nomeTarefa;
     private String descricao;
