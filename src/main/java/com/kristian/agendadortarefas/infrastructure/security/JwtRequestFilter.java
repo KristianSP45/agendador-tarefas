@@ -1,3 +1,5 @@
+//JwtRequestFilter é o porteiro da API.
+//Ele decide quem entra antes do controller existir.
 package com.kristian.agendadortarefas.infrastructure.security;
 
 import jakarta.servlet.FilterChain;
@@ -16,8 +18,8 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     // Define propriedades para armazenar instâncias de JwtUtil e UserDetailsService
-    private final JwtUtil jwtUtil;
-    private final UserDetailsServiceImpl userDetailsService;
+    private final JwtUtil jwtUtil;//JwtUtil = entende o token
+    private final UserDetailsServiceImpl userDetailsService;//UserDetailsServiceImpl = entende o usuário
 
     // Construtor que inicializa as propriedades com instâncias fornecidas
     public JwtRequestFilter(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService) {

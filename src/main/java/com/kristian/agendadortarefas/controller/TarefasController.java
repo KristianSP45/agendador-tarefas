@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RestController
+@RestController//@Controller + @ResponseBody
 @RequiredArgsConstructor
 @RequestMapping("/tarefas")
 public class TarefasController {
@@ -27,6 +27,7 @@ public class TarefasController {
     public ResponseEntity<List<TarefasDTO>> buscaListaTarefasPorPeriodo(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataInicial,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFinal){
+        //@DateTimeFormat informa ao Spring que o valor vem como String e deve ser convertido para LocalDate(Time).
         return  ResponseEntity.ok(tarefasService.buscaTarefasAgendadasPorPeriodo(dataInicial, dataFinal));
     }
 
